@@ -1,5 +1,7 @@
 package com.ling.lingRpc.config;
 
+import lombok.Data;
+
 /**
  *
  * Rpc框架配置
@@ -7,6 +9,7 @@ package com.ling.lingRpc.config;
  * @version 1.0
  * i
  */
+@Data
 public class RpcConfig {
     /**
      * 名称
