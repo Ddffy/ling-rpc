@@ -1,7 +1,10 @@
 package com.ling.lingRpc;
 
+import com.ling.lingRpc.config.RegistryConfig;
 import com.ling.lingRpc.config.RpcConfig;
 import com.ling.lingRpc.constant.RpcConstant;
+import com.ling.lingRpc.registry.Registry;
+import com.ling.lingRpc.registry.RegistryFactory;
 import com.ling.lingRpc.utils.ConfigUtils;
 import lombok.extern.slf4j.Slf4j;
 /**
@@ -25,21 +28,30 @@ public class RpcApplication {
      */
     public static void init(RpcConfig newRpcConfig){
         rpcConfig=newRpcConfig;
-      log.info("rpc init, config ={}",newRpcConfig.toString());
+      log.info("rpc init, config = {}",newRpcConfig.toString());
+        // 注册中心初始化
+        RegistryConfig registryConfig = rpcConfig.getRegistryConfig();
+        Registry registry = RegistryFactory.getInstance(registryConfig.getRegistry());
+        registry.init(registryConfig);
+        log.info("registry init, config = {}", registryConfig);
+
+        // 创建并注册 Shutdown Hook，JVM 退出时执行操作
+        Runtime.getRuntime().addShutdownHook(new Thread(registry::destroy));
     }
 
     /**
      * 初始化
      */
     public static void init(){
-        RpcConfig newRpcConfig = null;
+        RpcConfig newRpcConfig ;
 
       try {
-          ConfigUtils.loadConfig(RpcConfig.class, RpcConstant.DEFAULT_CONFIG_PREFIX);
+          newRpcConfig = ConfigUtils.loadConfig(RpcConfig.class, RpcConstant.DEFAULT_CONFIG_PREFIX);
       }catch (Exception e){
           //失败使用默认值
           newRpcConfig = new RpcConfig();
       }
+
       init(newRpcConfig);
     }
 

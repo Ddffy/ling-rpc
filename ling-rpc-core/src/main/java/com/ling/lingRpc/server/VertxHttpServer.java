@@ -30,7 +30,7 @@ public class VertxHttpServer implements HttpServer{
         server.requestHandler(new HttpServerHandler());
         server.listen(port,result->{
             if(result.succeeded()){
-                    System.out.println("Server is now listening on port"+port);
+                    System.out.println("Server is now listening on port "+port);
             }else {
                 System.err.println("Failed to start server: "+ result.cause());
             }

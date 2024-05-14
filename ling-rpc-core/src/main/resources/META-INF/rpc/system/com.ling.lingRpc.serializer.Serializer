@@ -1,0 +1,5 @@
+jdk=com.ling.lingRpc.serializer.JdkSerializer
+hessian=com.ling.lingRpc.serializer.HessianSerializer
+json=com.ling.lingRpc.serializer.JsonSerializer
+kryo=com.ling.lingRpc.serializer.KryoSerializer
+protobuf=com.ling.lingRpc.serializer.ProtobufSerializer

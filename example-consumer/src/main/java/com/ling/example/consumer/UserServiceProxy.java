@@ -13,7 +13,7 @@ import cn.hutool.http.HttpRequest;
 
 /**
  *
- * 静态代理
+ * 静态代理（测试用）
  * @author lingcode
  * @version 1.0
  * i

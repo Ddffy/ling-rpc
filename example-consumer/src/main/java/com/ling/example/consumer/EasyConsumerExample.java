@@ -9,7 +9,7 @@ import com.ling.lingRpc.proxy.ServiceProxyFactory;
  * @version 1.0
  * i
  */
-public class EasyConsumerExample {
+public class   EasyConsumerExample {
     public static void main(String[] args) {
 
 

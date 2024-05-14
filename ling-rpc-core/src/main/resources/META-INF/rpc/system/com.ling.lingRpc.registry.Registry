@@ -1,0 +1,2 @@
+zookeeper=com.ling.lingRpc.registry.ZooKeeperRegistry
+etcd=com.ling.lingRpc.registry.EtcdRegistry
