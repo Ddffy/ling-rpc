@@ -4,12 +4,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ling.lingRpc.model.RpcRequest;
 import com.ling.lingRpc.model.RpcResponse;
 
+
 import java.io.IOException;
 
 /**
- * @author lingcode
- * @version 1.0
- * i
+ * Json 序列化器
+ *
  */
 public class JsonSerializer implements Serializer {
     private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();

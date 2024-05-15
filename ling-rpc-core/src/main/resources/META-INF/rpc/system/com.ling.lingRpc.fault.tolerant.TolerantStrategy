@@ -1,0 +1,4 @@
+failBack=com.ling.lingRpc.fault.tolerant.FailBackTolerantStrategy
+failFast=com.ling.lingRpc.fault.tolerant.FailFastTolerantStrategy
+failOver=com.ling.lingRpc.fault.tolerant.FailOverTolerantStrategy
+failSafe=com.ling.lingRpc.fault.tolerant.FailSafeTolerantStrategy

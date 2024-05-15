@@ -21,9 +21,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
- * @author lingcode
- * @version 1.0
- * i
+ * zookeeper 注册中心
  */
 @Slf4j
 public class ZooKeeperRegistry implements Registry {

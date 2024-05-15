@@ -1,0 +1,3 @@
+roundRobin=com.ling.lingRpc.loadbalancer.RoundRobinLoadBalancer
+random=com.ling.lingRpc.loadbalancer.RandomLoadBalancer
+consistentHash=com.ling.lingRpc.loadbalancer.ConsistentHashLoadBalancer

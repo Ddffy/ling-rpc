@@ -3,11 +3,11 @@ package com.ling.example.common.model;
 import java.io.Serializable;
 
 /**
- * @author lingcode
- * @version 1.0
- * i
+ * 用户
+ *
  */
 public class User implements Serializable {
+
     private String name;
 
     public String getName() {

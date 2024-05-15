@@ -8,9 +8,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
 /**
- * @author lingcode
- * @version 1.0
- * i
+ * Hessian 序列化器
+ *
  */
 public class HessianSerializer implements Serializer {
     @Override

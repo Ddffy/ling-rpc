@@ -1,32 +1,30 @@
 package com.ling.example.consumer;
 
+
 import com.ling.example.common.model.User;
 import com.ling.example.common.service.UserService;
-import com.ling.lingRpc.RpcApplication;
-import com.ling.lingRpc.config.RpcConfig;
+import com.ling.lingRpc.bootstrap.ConsumerBootstrap;
 import com.ling.lingRpc.proxy.ServiceProxyFactory;
-import com.ling.lingRpc.utils.ConfigUtils;
 
 /**
- * @author lingcode
- * @version 1.0
- * i
+ * 服务消费者示例
  */
 public class ConsumerExample {
-    public static void main(String[] args) {
-        RpcConfig rpc = ConfigUtils.loadConfig(RpcConfig.class,"rpc");
 
-        System.out.println(rpc);
-        UserService userService= ServiceProxyFactory.getProxy(UserService.class);
+    public static void main(String[] args) {
+        // 服务提供者初始化
+        ConsumerBootstrap.init();
+
+        // 获取代理
+        UserService userService = ServiceProxyFactory.getProxy(UserService.class);
         User user = new User();
         user.setName("ling");
+        // 调用
         User newUser = userService.getUser(user);
-
-        if(newUser !=null){
+        if (newUser != null) {
             System.out.println(newUser.getName());
-        }else {
-            System.out.println("user==null");
+        } else {
+            System.out.println("user == null");
         }
-
     }
 }

@@ -1,15 +1,17 @@
 package com.ling.example.common.service;
 
+
 import com.ling.example.common.model.User;
 
 /**
- * @author lingcode
- * @version 1.0
- * i
+ * 用户服务
+ *
+
  */
 public interface UserService {
 
     /**
+     * 获取用户
      *
      * @param user
      * @return
@@ -17,11 +19,11 @@ public interface UserService {
     User getUser(User user);
 
     /**
-     * 测试mock
+     * 用于测试 mock 接口返回值
+     *
      * @return
      */
-    default short getNumber(){
+    default short getNumber() {
         return 1;
     }
-
 }

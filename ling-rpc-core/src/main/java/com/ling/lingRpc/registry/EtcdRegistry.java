@@ -1,6 +1,5 @@
 package com.ling.lingRpc.registry;
 
-
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.collection.ConcurrentHashSet;
 import cn.hutool.cron.CronUtil;
@@ -9,49 +8,46 @@ import cn.hutool.json.JSONUtil;
 import com.ling.lingRpc.config.RegistryConfig;
 import com.ling.lingRpc.model.ServiceMetaInfo;
 import io.etcd.jetcd.*;
-import io.etcd.jetcd.api.Kv;
 import io.etcd.jetcd.options.GetOption;
 import io.etcd.jetcd.options.PutOption;
 import io.etcd.jetcd.watch.WatchEvent;
 
-import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.time.Duration;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.concurrent.ExecutionException;
 import java.util.stream.Collectors;
 
 /**
- * @author lingcode
- * @version 1.0
- * i
+ * Etcd 注册中心
+ *
  */
-public class EtcdRegistry implements Registry{
+public class EtcdRegistry implements Registry {
 
-    /**
-     * 本机注册的节点key集合
-     */
-    private final Set<String> localRegisterNodeKeySet = new HashSet<>();
     private Client client;
 
     private KV kvClient;
 
     /**
-     * 根节点
+     * 本机注册的节点 key 集合（用于维护续期）
      */
-    private static final String ETCD_ROOT_PATH = "/rpc/";
+    private final Set<String> localRegisterNodeKeySet = new HashSet<>();
 
     /**
      * 注册中心服务缓存
      */
     private final RegistryServiceCache registryServiceCache = new RegistryServiceCache();
+
     /**
      * 正在监听的 key 集合
      */
     private final Set<String> watchingKeySet = new ConcurrentHashSet<>();
 
+    /**
+     * 根节点
+     */
+    private static final String ETCD_ROOT_PATH = "/rpc/";
 
     @Override
     public void init(RegistryConfig registryConfig) {

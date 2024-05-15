@@ -1,41 +1,39 @@
 package com.ling.lingRpc.config;
 
+
+import com.ling.lingRpc.fault.retry.RetryStrategyKeys;
+import com.ling.lingRpc.fault.tolerant.TolerantStrategyKeys;
+import com.ling.lingRpc.loadbalancer.LoadBalancerKeys;
 import com.ling.lingRpc.serializer.SerializerKeys;
 import lombok.Data;
 
 /**
+ * RPC 框架全局配置
  *
- * Rpc框架配置
- * @author lingcode
- * @version 1.0
- * i
+
  */
 @Data
 public class RpcConfig {
+
     /**
      * 名称
      */
-   private String name="ling-rpc";
+    private String name = "lingrpc";
 
     /**
      * 版本号
      */
-   private String version="1.0";
+    private String version = "1.0";
 
     /**
-     * 服务器地址
+     * 服务器主机名
      */
-   private String serverHost="localhost";
+    private String serverHost = "localhost";
 
     /**
-     * 服务器端口
+     * 服务器端口号
      */
-   private Integer serverPort=8082;
-
-    /**
-     * 模拟调用
-     */
-   private boolean mock=false;
+    private Integer serverPort = 8080;
 
     /**
      * 序列化器
@@ -43,8 +41,27 @@ public class RpcConfig {
     private String serializer = SerializerKeys.JDK;
 
     /**
+     * 负载均衡器
+     */
+    private String loadBalancer = LoadBalancerKeys.ROUND_ROBIN;
+
+    /**
+     * 重试策略
+     */
+    private String retryStrategy = RetryStrategyKeys.NO;
+
+    /**
+     * 容错策略
+     */
+    private String tolerantStrategy = TolerantStrategyKeys.FAIL_FAST;
+
+    /**
+     * 模拟调用
+     */
+    private boolean mock = false;
+
+    /**
      * 注册中心配置
      */
     private RegistryConfig registryConfig = new RegistryConfig();
-
 }

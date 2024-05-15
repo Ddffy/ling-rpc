@@ -5,14 +5,8 @@ import com.ling.lingRpc.model.ServiceMetaInfo;
 import java.util.List;
 
 /**
- *
- * 服务缓存
- * @author lingcode
- * @version 1.0
- * i
- */
-/**
  * 注册中心服务本地缓存
+ *
  */
 public class RegistryServiceCache {
 

@@ -1,11 +1,5 @@
 package com.ling.lingRpc.spi;
 
-/**
- * @author lingcode
- * @version 1.0
- * i
- */
-
 import cn.hutool.core.io.resource.ResourceUtil;
 import com.ling.lingRpc.serializer.Serializer;
 import lombok.extern.slf4j.Slf4j;
@@ -13,7 +7,6 @@ import lombok.extern.slf4j.Slf4j;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.lang.reflect.InvocationTargetException;
 import java.net.URL;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -22,7 +15,9 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * SPI 加载器（支持键值对映射）
+ * SPI 加载器
+ * 自定义实现，支持键值对映射
+ *
  */
 @Slf4j
 public class SpiLoader {
@@ -30,12 +25,12 @@ public class SpiLoader {
     /**
      * 存储已加载的类：接口名 =>（key => 实现类）
      */
-    private static Map<String, Map<String, Class<?>>> loaderMap = new ConcurrentHashMap<>();
+    private static final Map<String, Map<String, Class<?>>> loaderMap = new ConcurrentHashMap<>();
 
     /**
      * 对象实例缓存（避免重复 new），类路径 => 对象实例，单例模式
      */
-    private static Map<String, Object> instanceCache = new ConcurrentHashMap<>();
+    private static final Map<String, Object> instanceCache = new ConcurrentHashMap<>();
 
     /**
      * 系统 SPI 目录
@@ -55,8 +50,7 @@ public class SpiLoader {
     /**
      * 动态加载的类列表
      */
-    private static final List<Class<?>> LOAD_CLASS_LIST =
-            Arrays.asList(Serializer.class);
+    private static final List<Class<?>> LOAD_CLASS_LIST = Arrays.asList(Serializer.class);
 
     /**
      * 加载所有类型
@@ -91,8 +85,8 @@ public class SpiLoader {
         String implClassName = implClass.getName();
         if (!instanceCache.containsKey(implClassName)) {
             try {
-                instanceCache.put(implClassName, implClass.getDeclaredConstructor().newInstance());
-            } catch (InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
+                instanceCache.put(implClassName, implClass.newInstance());
+            } catch (InstantiationException | IllegalAccessException e) {
                 String errorMsg = String.format("%s 类实例化失败", implClassName);
                 throw new RuntimeException(errorMsg, e);
             }
@@ -104,9 +98,9 @@ public class SpiLoader {
      * 加载某个类型
      *
      * @param loadClass
-     * @throws
+     * @throws IOException
      */
-    public static Map<String, Class<?>> load(Class<?> loadClass){
+    public static Map<String, Class<?>> load(Class<?> loadClass) {
         log.info("加载类型为 {} 的 SPI", loadClass.getName());
         // 扫描路径，用户自定义的 SPI 优先级高于系统 SPI
         Map<String, Class<?>> keyClassMap = new HashMap<>();
@@ -134,4 +128,12 @@ public class SpiLoader {
         loaderMap.put(loadClass.getName(), keyClassMap);
         return keyClassMap;
     }
+
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
+        loadAll();
+        System.out.println(loaderMap);
+        Serializer serializer = getInstance(Serializer.class, "e");
+        System.out.println(serializer);
+    }
+
 }

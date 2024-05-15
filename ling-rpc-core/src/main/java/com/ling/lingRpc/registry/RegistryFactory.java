@@ -1,24 +1,18 @@
 package com.ling.lingRpc.registry;
 
-import com.ling.lingRpc.serializer.JdkSerializer;
-import com.ling.lingRpc.serializer.Serializer;
 import com.ling.lingRpc.spi.SpiLoader;
 
+
 /**
+ * 注册中心工厂（用于获取注册中心对象）
  *
- * 注册器工厂
- * @author lingcode
- * @version 1.0
- * i
  */
 public class RegistryFactory {
 
-    /**
-     * 序列化器工厂
-     */
-        static {
-                    SpiLoader.load(Registry.class);
-        }
+    // SPI 动态加载
+    static {
+        SpiLoader.load(Registry.class);
+    }
 
     /**
      * 默认注册中心
@@ -32,7 +26,7 @@ public class RegistryFactory {
      * @return
      */
     public static Registry getInstance(String key) {
-        return SpiLoader.getInstance(Registry.class,key);
+        return SpiLoader.getInstance(Registry.class, key);
     }
 
 }

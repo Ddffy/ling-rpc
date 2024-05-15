@@ -1,0 +1,2 @@
+no=com.ling.lingRpc.fault.retry.NoRetryStrategy
+fixedInterval=com.ling.lingRpc.fault.retry.FixedIntervalRetryStrategy

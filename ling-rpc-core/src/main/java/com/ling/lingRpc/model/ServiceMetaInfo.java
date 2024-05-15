@@ -5,39 +5,36 @@ import com.ling.lingRpc.constant.RpcConstant;
 import lombok.Data;
 
 /**
- * 服务注册用
- * @author lingcode
- * @version 1.0
- * i
+ * 服务元信息（注册信息）
+ *
  */
 @Data
 public class ServiceMetaInfo {
 
     /**
-     * 服务名
+     * 服务名称
      */
     private String serviceName;
 
     /**
-     * 服务版本
+     * 服务版本号
      */
     private String serviceVersion = RpcConstant.DEFAULT_SERVICE_VERSION;
 
     /**
-     * 服务地址
+     * 服务域名
      */
-    private String  serviceHost;
+    private String serviceHost;
 
     /**
-     * 服务端口
+     * 服务端口号
      */
-    private int servicePort;
-
+    private Integer servicePort;
 
     /**
-     * 服务分组
+     * 服务分组（暂未实现）
      */
-    private String serviceGroup="default";
+    private String serviceGroup = "default";
 
     /**
      * 获取服务键名

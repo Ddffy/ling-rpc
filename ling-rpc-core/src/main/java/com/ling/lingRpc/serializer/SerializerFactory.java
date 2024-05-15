@@ -2,24 +2,15 @@ package com.ling.lingRpc.serializer;
 
 import com.ling.lingRpc.spi.SpiLoader;
 
-import java.util.HashMap;
-import java.util.Map;
-
 /**
+ * 序列化器工厂（工厂模式，用于获取序列化器对象）
  *
- * 序列化工厂
- * @author lingcode
- * @version 1.0
- * i
  */
 public class SerializerFactory {
 
-    /**
-     * 序列化器工厂
-     */
-        static {
-            SpiLoader.load(Serializer.class);
-        }
+    static {
+        SpiLoader.load(Serializer.class);
+    }
 
     /**
      * 默认序列化器
@@ -33,7 +24,7 @@ public class SerializerFactory {
      * @return
      */
     public static Serializer getInstance(String key) {
-        return SpiLoader.getInstance(Serializer.class,key);
+        return SpiLoader.getInstance(Serializer.class, key);
     }
 
 }
